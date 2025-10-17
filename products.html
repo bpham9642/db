@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Cửa hàng công nghệ - Tất cả sản phẩm</title>
+    <link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+    <main>
+        <section class="section" id="all">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Tất cả sản phẩm</h2>
+                    <div class="section-actions">
+                        <select class="select" id="categoryFilter" title="Lọc danh mục">
+                            <option value="all">Tất cả danh mục</option>
+                            <option value="điện thoại">Điện thoại</option>
+                            <option value="laptop">Laptop</option>
+                        </select>
+                        <select class="select" id="sortFilter" title="Sắp xếp">
+                            <option value="">Sắp xếp theo giá</option>
+                            <option value="asc">Giá tăng dần</option>
+                            <option value="desc">Giá giảm dần</option>
+                        </select>
+                        </div>
+                </div>
+                <div class="grid" id="product-all-container">
+                    </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="main.js"></script> 
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const productContainer = document.getElementById('product-all-container');
+        // Giả sử searchInput nằm trong header được tạo bởi main.js
+        const searchInput = document.getElementById('searchInput'); 
+        const categoryFilter = document.getElementById('categoryFilter');
+        const sortFilter = document.getElementById('sortFilter');
+        const resetButton = document.getElementById('resetButton'); // Nút này có thể không có
+
+        let allProducts = [];
+
+        function renderProducts(productsToRender) {
+            if (!productContainer) return;
+            if (!productsToRender || productsToRender.length === 0) {
+                productContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Không tìm thấy sản phẩm phù hợp.</p>';
+                return;
+            }
+
+            let html = "";
+            productsToRender.forEach(item => {
+                const formattedPrice = new Intl.NumberFormat('vi-VN').format(item.price);
+                html += `
+                    <a href="detail.html?id=${item.id}" class="product-card-link">
+                        <div class="product" data-category="${item.category}">
+                            <div class="product-image">
+                                <img src="${item.image}" alt="${item.name}">
+                                ${item.hot ? '<span class="product-badge">HOT</span>' : ''}
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">${item.name}</h3>
+                                <p class="product-price">${formattedPrice} ₫</p>
+                                <span class="view-details-link">Xem chi tiết</span>
+                            </div>
+                        </div>
+                    </a>
+                `;
+            });
+            productContainer.innerHTML = html;
+        }
+
+        function updateDisplay() {
+            const selectedCategory = categoryFilter.value;
+            const sortOrder = sortFilter.value;
+            const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+
+            let processedProducts = [...allProducts];
+
+            // Lọc theo danh mục
+            if (selectedCategory !== 'all') {
+                // SỬA LỖI TẠI ĐÂY: Sửa "selected-category" thành "selectedCategory"
+                processedProducts = processedProducts.filter(product => product.category === selectedCategory);
+            }
+
+            // Lọc theo từ khóa tìm kiếm
+            if (searchTerm) {
+                processedProducts = processedProducts.filter(product => product.name.toLowerCase().includes(searchTerm));
+            }
+
+            // Sắp xếp theo giá
+            if (sortOrder === 'asc') {
+                processedProducts.sort((a, b) => a.price - b.price);
+            } else if (sortOrder === 'desc') {
+                processedProducts.sort((a, b) => b.price - a.price);
+            }
+            
+            renderProducts(processedProducts);
+        }
+
+        // Lấy dữ liệu sản phẩm ban đầu
+        fetch('https://my-json-server.typicode.com/bpham9642/db/products') 
+            .then(response => response.json())
+            .then(data => {
+                allProducts = data;
+                updateDisplay(); // Hiển thị sản phẩm lần đầu
+            })
+            .catch(error => {
+                console.error('Lỗi khi tải sản phẩm:', error);
+                if(productContainer) {
+                    productContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: red;">Không thể tải dữ liệu sản phẩm.</p>';
+                }
+            });
+
+        // Gán sự kiện cho các bộ lọc
+        categoryFilter.addEventListener('change', updateDisplay);
+        sortFilter.addEventListener('change', updateDisplay);
+        if (searchInput) {
+            searchInput.addEventListener('input', updateDisplay);
+        }
+        if (resetButton) {
+            resetButton.addEventListener('click', function() {
+                if(searchInput) searchInput.value = '';
+                categoryFilter.value = 'all';
+                sortFilter.value = '';
+                updateDisplay();
+            });
+        }
+    });
+    </script>
+</body>
+</html>

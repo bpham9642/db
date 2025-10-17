@@ -1,0 +1,85 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Iphone 14",
+      "price": 20000000,
+      "image": "img/iphone.jpg",
+      "category": "điện thoại",
+      "hot": true,
+      "description": "iPhone 14 với camera cải tiến"
+    },
+    {
+      "id": "2",
+      "name": "Samsung S23",
+      "price": 18000000,
+      "image": "img/samsung.jpg",
+      "category": "điện thoại",
+      "hot": false,
+      "description": "Samsung Galaxy S23 flagship"
+    },
+    {
+      "id": "3",
+      "name": "Xiaomi 13",
+      "price": 15000000,
+      "image": "img/xiaomi.jpg",
+      "category": "điện thoại",
+      "hot": false,
+      "description": "Xiaomi 13 với hiệu năng mạnh mẽ"
+    },
+    {
+      "id": "4",
+      "name": "Vivo X30",
+      "price": 7000000,
+      "image": "img/vivo.jpg",
+      "category": "điện thoại",
+      "hot": false,
+      "description": "Vivo X30 với thiết kế thời trang"
+    },
+    {
+      "id": "5",
+      "name": "Macbook Pro 2023",
+      "price": 55000000,
+      "image": "img/macbook.jpg",
+      "category": "laptop",
+      "hot": true,
+      "description": "Macbook Pro cho công việc sáng tạo"
+    },
+    {
+      "id": "6",
+      "name": "Dell XPS 13",
+      "price": 35000000,
+      "image": "img/dell.jpg",
+      "category": "laptop",
+      "hot": false,
+      "description": "Dell XPS 13 ultrabook"
+    },
+    {
+      "id": "7",
+      "name": "Asus Zenbook",
+      "price": 25000000,
+      "image": "img/asus.jpg",
+      "category": "laptop",
+      "hot": false,
+      "description": "Asus Zenbook mỏng nhẹ"
+    },
+    {
+      "id": "8",
+      "name": "HP Envy",
+      "price": 20000000,
+      "image": "img/hp.jpg",
+      "category": "laptop",
+      "hot": false,
+      "description": "HP Envy hiệu suất cao"
+    },
+    {
+      "id": "9",
+      "name": "iPhone 11",
+      "price": 11000000,
+      "image": "img/iphone.jpg",
+      "category": "điện thoại",
+      "hot": false,
+      "description": ""
+    }
+  ]
+}

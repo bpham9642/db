@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng điều khiển - phamShop Admin</title>
+    <link href="style.css" rel="stylesheet"/>
+</head>
+<body class="admin-page">
+    <div class="admin-wrapper">
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <a class="admin-logo" href="index.html">pham<span>Shop</span></a>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="admin.html" class="active"><i class="fas fa-box"></i> Quản lý sản phẩm</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-main-content">
+            <header class="admin-topbar">
+                <div class="topbar-left">
+                    <h1>Quản lý sản phẩm</h1>
+                </div>
+                <div class="topbar-right">
+                    <button id="add-product-btn" class="admin-action-button primary">
+                        Thêm sản phẩm mới
+                    </button>
+                </div>
+            </header>
+
+            <section class="admin-dashboard-section">
+                <div class="dashboard-card">
+                    <h2>Danh sách sản phẩm</h2>
+                    <div class="table-wrapper">
+                        <table class="admin-product-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Danh mục</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-product-list">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="product-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-title">Thêm sản phẩm mới</h2>
+            <form id="product-form">
+                <input type="hidden" id="product-id">
+                <div class="form-group">
+                    <label for="product-name">Tên sản phẩm</label>
+                    <input type="text" id="product-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-price">Giá (VNĐ)</label>
+                    <input type="number" id="product-price" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-image-upload">Tải lên hình ảnh mới</label>
+                    <input type="file" id="product-image-upload" accept="image/*">
+                    <small>Nếu bạn đang chỉnh sửa, bỏ trống phần này sẽ giữ lại ảnh cũ.</small>
+                    <input type="hidden" id="product-image-old-url"> 
+                </div>
+                <div class="form-group">
+                    <label for="product-category">Danh mục</label>
+                    <select id="product-category">
+                        <option value="điện thoại">Điện thoại</option>
+                        <option value="laptop">Laptop</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="product-description">Mô tả</label>
+                    <textarea id="product-description" rows="4"></textarea>
+                </div>
+                <div class="form-group-checkbox">
+                    <input type="checkbox" id="product-hot">
+                    <label for="product-hot">Là sản phẩm nổi bật (HOT)?</label>
+                </div>
+                <button type="submit" class="admin-action-button primary">Lưu thay đổi</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="admin.js"></script>
+</body>
+</html>
